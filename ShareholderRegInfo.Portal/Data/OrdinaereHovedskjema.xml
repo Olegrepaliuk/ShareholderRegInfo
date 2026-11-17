@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Skjema skjemanummer="890" spesifikasjonsnummer="12144">
+  <GenerellInformasjon-grp-2587 gruppeid="2587">
+    <Selskap-grp-2588 gruppeid="2588">
+      <EnhetOrganisasjonsnummer-datadef-18 orid="18">313849899</EnhetOrganisasjonsnummer-datadef-18>
+      <EnhetNavn-datadef-1 orid="1">Testklient 313 849 899</EnhetNavn-datadef-1>
+      <EnhetAdresse-datadef-15 orid="15">Karenslyst alle 10</EnhetAdresse-datadef-15>
+      <EnhetPostnummer-datadef-6673 orid="6673">0279</EnhetPostnummer-datadef-6673>
+      <EnhetPoststed-datadef-6674 orid="6674">OSLO</EnhetPoststed-datadef-6674>
+      <AksjeType-datadef-17659 orid="17659">01</AksjeType-datadef-17659>
+      <Inntektsar-datadef-692 orid="692">2025</Inntektsar-datadef-692>
+      <AksjonarregisteroppgaveHovedskjemaInnsendingsmate-datadef-34855 orid="34855">3</AksjonarregisteroppgaveHovedskjemaInnsendingsmate-datadef-34855>
+    </Selskap-grp-2588>
+    <Kontaktperson-grp-3442 gruppeid="3442">
+      <KontaktpersonSkjemaNavn-datadef-33918 orid="33918">Sjef Sjefsen</KontaktpersonSkjemaNavn-datadef-33918>
+      <KontaktpersonSkjemaEPost-datadef-30533 orid="30533">sjef.sjefsen@epost.no</KontaktpersonSkjemaEPost-datadef-30533>
+      <KontaktpersonSkjemaTelefonnummer-datadef-33916 orid="33916">70707070</KontaktpersonSkjemaTelefonnummer-datadef-33916>
+    </Kontaktperson-grp-3442>
+
+   </GenerellInformasjon-grp-2587>
+    <Selskapsopplysninger-grp-2589 gruppeid="2589">
+      <AksjekapitalForHeleSelskapet-grp-3443 gruppeid="3443">
+        <AksjekapitalFjoraret-datadef-7129 orid="7129">300000.00</AksjekapitalFjoraret-datadef-7129>
+        <Aksjekapital-datadef-87 orid="87">300000.00</Aksjekapital-datadef-87>
+      </AksjekapitalForHeleSelskapet-grp-3443>
+      <AksjekapitalIDenneAksjeklassen-grp-3444 gruppeid="3444">
+        <AksjekapitalISINAksjetypeFjoraret-datadef-17663 orid="17663">300000.00</AksjekapitalISINAksjetypeFjoraret-datadef-17663>
+        <AksjekapitalISINAksjetype-datadef-17664 orid="17664">300000.00</AksjekapitalISINAksjetype-datadef-17664>
+      </AksjekapitalIDenneAksjeklassen-grp-3444>
+      <PalydendePerAksje-grp-3447 gruppeid="3447">
+        <AksjeMvPalydendeFjoraret-datadef-23944 orid="23944">200.000000</AksjeMvPalydendeFjoraret-datadef-23944>
+        <AksjeMvPalydende-datadef-23945 orid="23945">200.000000</AksjeMvPalydende-datadef-23945>
+      </PalydendePerAksje-grp-3447>
+      <AntallAksjerIDenneAksjeklassen-grp-3445 gruppeid="3445">
+        <AksjerMvAntallFjoraret-datadef-29166 orid="29166">1500</AksjerMvAntallFjoraret-datadef-29166>
+        <AksjerMvAntall-datadef-29167 orid="29167">1500</AksjerMvAntall-datadef-29167>
+      </AntallAksjerIDenneAksjeklassen-grp-3445>
+      <InnbetaltAksjekapitalIDenneAksjeklassen-grp-3446 gruppeid="3446">
+        <AksjekapitalInnbetaltFjoraret-datadef-8020 orid="8020">300000.00</AksjekapitalInnbetaltFjoraret-datadef-8020>
+        <AksjekapitalInnbetalt-datadef-5867 orid="5867">300000.00</AksjekapitalInnbetalt-datadef-5867>
+      </InnbetaltAksjekapitalIDenneAksjeklassen-grp-3446>
+      <InnbetaltOverkursIDenneAksjeklassen-grp-3448 gruppeid="3448">
+        <AksjeOverkursISINAksjetypeFjoraret-datadef-17662 orid="17662">0.00</AksjeOverkursISINAksjetypeFjoraret-datadef-17662>
+        <AksjeOverkursISINAksjetype-datadef-17661 orid="17661">0.00</AksjeOverkursISINAksjetype-datadef-17661>
+      </InnbetaltOverkursIDenneAksjeklassen-grp-3448>
+    </Selskapsopplysninger-grp-2589>
+
+
+
+
+
+
+  </Skjema>

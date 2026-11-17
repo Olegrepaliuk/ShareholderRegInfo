@@ -1,0 +1,158 @@
+﻿@model RegisterViewModel
+@{
+    ViewData["Title"] = "Aksjonærregisteroppgaven";
+}
+
+@if (Model.Form is not { } form)
+{
+    <div class="alert alert-danger" role="alert">
+        <h1 class="h5 alert-heading">Aksjonærregisteroppgaven kan ikke vises</h1>
+        <p class="mb-0">@Model.ErrorMessage</p>
+    </div>
+}
+else
+{
+    var company = form.Company;
+    var contact = form.ContactPerson;
+    var capital = form.ShareCapital;
+
+    var previousYearHeading = company.IncomeYear is { } year ? (year - 1).ToString() : "Fjorår";
+    var currentYearHeading = company.IncomeYear?.ToString() ?? "I år";
+
+    var capitalRows = new List<(string Label, string Previous, string Current)>
+    {
+        ("Aksjekapital for hele selskapet",
+            NorwegianFormat.Amount(capital.TotalShareCapital.PreviousYear),
+            NorwegianFormat.Amount(capital.TotalShareCapital.CurrentYear)),
+    };
+
+    if (capital.ShareClassCapital.HasAnyValue)
+    {
+        capitalRows.Add(("Aksjekapital i denne aksjeklassen",
+            NorwegianFormat.Amount(capital.ShareClassCapital.PreviousYear),
+            NorwegianFormat.Amount(capital.ShareClassCapital.CurrentYear)));
+    }
+
+    capitalRows.Add(("Antall aksjer",
+        NorwegianFormat.Count(capital.NumberOfShares.PreviousYear),
+        NorwegianFormat.Count(capital.NumberOfShares.CurrentYear)));
+    capitalRows.Add(("Pålydende per aksje",
+        NorwegianFormat.NominalValue(capital.NominalValuePerShare.PreviousYear),
+        NorwegianFormat.NominalValue(capital.NominalValuePerShare.CurrentYear)));
+
+    if (capital.PaidInShareCapital.HasAnyValue)
+    {
+        capitalRows.Add(("Innbetalt aksjekapital",
+            NorwegianFormat.Amount(capital.PaidInShareCapital.PreviousYear),
+            NorwegianFormat.Amount(capital.PaidInShareCapital.CurrentYear)));
+    }
+    if (capital.PaidInSharePremium.HasAnyValue)
+    {
+        capitalRows.Add(("Innbetalt overkurs",
+            NorwegianFormat.Amount(capital.PaidInSharePremium.PreviousYear),
+            NorwegianFormat.Amount(capital.PaidInSharePremium.CurrentYear)));
+    }
+
+    <div class="mb-4">
+        <h1 class="h3 mb-1">@NorwegianFormat.Text(company.Name)</h1>
+        <p class="text-body-secondary mb-0">
+            Aksjonærregisteroppgaven for inntektsåret @NorwegianFormat.Year(company.IncomeYear)
+        </p>
+    </div>
+
+    <div class="row g-4">
+        <section class="col-lg-7" aria-labelledby="company-heading">
+            <div class="card h-100 shadow-sm">
+                <div class="card-header bg-body-tertiary">
+                    <h2 id="company-heading" class="h5 mb-0">Selskapsinformasjon</h2>
+                </div>
+                <div class="card-body">
+                    <dl class="row mb-0">
+                        <dt class="col-sm-5 fw-normal text-body-secondary">Selskapets navn</dt>
+                        <dd class="col-sm-7">@NorwegianFormat.Text(company.Name)</dd>
+
+                        <dt class="col-sm-5 fw-normal text-body-secondary">Organisasjonsnummer</dt>
+                        <dd class="col-sm-7 num">@NorwegianFormat.OrganizationNumber(company.OrganizationNumber)</dd>
+
+                        <dt class="col-sm-5 fw-normal text-body-secondary">Adresse</dt>
+                        <dd class="col-sm-7">
+                            @if (company.Address.IsEmpty)
+                            {
+                                @NorwegianFormat.Missing
+                            }
+                            else
+                            {
+                                @company.Address.Street<br />
+                                @($"{company.Address.PostalCode} {company.Address.City}".Trim())
+                            }
+                        </dd>
+
+                        <dt class="col-sm-5 fw-normal text-body-secondary">Aksjetype</dt>
+                        <dd class="col-sm-7">@NorwegianFormat.Text(company.ShareClass?.DisplayName)</dd>
+
+                        <dt class="col-sm-5 fw-normal text-body-secondary">Inntektsår</dt>
+                        <dd class="col-sm-7 mb-0">@NorwegianFormat.Year(company.IncomeYear)</dd>
+                    </dl>
+                </div>
+            </div>
+        </section>
+
+        <section class="col-lg-5" aria-labelledby="contact-heading">
+            <div class="card h-100 shadow-sm">
+                <div class="card-header bg-body-tertiary">
+                    <h2 id="contact-heading" class="h5 mb-0">Kontaktperson for skjemaet</h2>
+                </div>
+                <div class="card-body">
+                    <dl class="row mb-0">
+                        <dt class="col-sm-4 fw-normal text-body-secondary">Navn</dt>
+                        <dd class="col-sm-8">@NorwegianFormat.Text(contact.Name)</dd>
+
+                        <dt class="col-sm-4 fw-normal text-body-secondary">E-post</dt>
+                        <dd class="col-sm-8 text-break">
+                            @if (string.IsNullOrWhiteSpace(contact.Email))
+                            {
+                                @NorwegianFormat.Missing
+                            }
+                            else
+                            {
+                                <a href="mailto:@contact.Email">@contact.Email</a>
+                            }
+                        </dd>
+
+                        <dt class="col-sm-4 fw-normal text-body-secondary">Telefon</dt>
+                        <dd class="col-sm-8 mb-0 num">@NorwegianFormat.Text(contact.Phone)</dd>
+                    </dl>
+                </div>
+            </div>
+        </section>
+
+        <section class="col-12" aria-labelledby="capital-heading">
+            <div class="card shadow-sm">
+                <div class="card-header bg-body-tertiary">
+                    <h2 id="capital-heading" class="h5 mb-0">Aksjekapital og antall aksjer</h2>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="fw-normal text-body-secondary">Post</th>
+                                <th scope="col" class="fw-normal text-body-secondary text-end">@previousYearHeading</th>
+                                <th scope="col" class="text-end">@currentYearHeading</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var row in capitalRows)
+                            {
+                                <tr>
+                                    <th scope="row" class="fw-normal">@row.Label</th>
+                                    <td class="text-end num text-body-secondary">@row.Previous</td>
+                                    <td class="text-end num fw-semibold">@row.Current</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+}
